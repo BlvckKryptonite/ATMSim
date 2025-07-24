@@ -29,8 +29,10 @@ Preferred communication style: Simple, everyday language.
 - **Database**: PostgreSQL with Drizzle ORM
 - **Provider**: Neon Database (serverless PostgreSQL)
 - **Schema Management**: Drizzle migrations
-- **Development Storage**: In-memory storage class for demo data
+- **Production Storage**: DatabaseStorage class with PostgreSQL persistence
+- **Development Fallback**: MemStorage class with in-memory demo data
 - **Session Management**: PostgreSQL session store with connect-pg-simple
+- **Demo Data**: 5 seeded users including Muma Kalobwe with transaction history
 
 ## Key Components
 
