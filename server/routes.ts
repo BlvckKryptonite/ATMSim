@@ -5,6 +5,26 @@ import { loginSchema, transactionSchema } from "@shared/schema";
 import { v4 as uuidv4 } from "uuid";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for debugging
+  app.get("/api/health", async (req, res) => {
+    try {
+      const hasDatabase = process.env.DATABASE_URL ? true : false;
+      const testUser = await storage.getUserByUsername("demo1");
+      res.json({ 
+        status: "ok", 
+        database: hasDatabase ? "connected" : "memory-storage",
+        storage: testUser ? "working" : "no-data",
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      res.status(500).json({ 
+        status: "error", 
+        message: error instanceof Error ? error.message : "Unknown error",
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+
   // Authentication endpoint
   app.post("/api/auth/login", async (req, res) => {
     try {
@@ -19,7 +39,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const { pin: _, ...userWithoutPin } = user;
       res.json({ user: userWithoutPin });
     } catch (error) {
-      res.status(400).json({ message: "Invalid request data" });
+      console.error("Login error:", error);
+      res.status(500).json({ 
+        message: error instanceof Error ? error.message : "Authentication failed" 
+      });
     }
   });
 

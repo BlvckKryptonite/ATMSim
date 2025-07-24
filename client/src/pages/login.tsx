@@ -30,10 +30,13 @@ export default function Login() {
     setError(null);
     
     try {
-      const response = await apiRequest("POST", "/api/auth/login", data);
-      const result = await response.json();
+      const user = await authManager.authenticateUser(data.username, data.pin);
       
-      authManager.setCurrentUser(result.user);
+      if (user) {
+        authManager.setCurrentUser(user);
+      } else {
+        setError("Invalid username or PIN. Please check your credentials.");
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed. Please check your credentials.");
     } finally {

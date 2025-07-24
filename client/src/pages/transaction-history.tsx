@@ -20,6 +20,10 @@ export default function TransactionHistory() {
 
   const { data: transactions = [], isLoading } = useQuery<Transaction[]>({
     queryKey: ['/api/users', user?.id, 'transactions'],
+    queryFn: async () => {
+      if (!user?.id) return [];
+      return await authManager.getUserTransactions(user.id);
+    },
     enabled: !!user?.id,
   });
 

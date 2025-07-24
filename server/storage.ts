@@ -14,16 +14,19 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
+    if (!db) throw new Error("Database not available");
     const [user] = await db.select().from(users).where(eq(users.id, id));
     return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
+    if (!db) throw new Error("Database not available");
     const [user] = await db.select().from(users).where(eq(users.username, username));
     return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
+    if (!db) throw new Error("Database not available");
     const [user] = await db
       .insert(users)
       .values(insertUser)
@@ -32,6 +35,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateUserBalance(id: number, newBalance: string): Promise<User | undefined> {
+    if (!db) throw new Error("Database not available");
     const [user] = await db
       .update(users)
       .set({ balance: newBalance })
@@ -41,6 +45,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
+    if (!db) throw new Error("Database not available");
     const [transaction] = await db
       .insert(transactions)
       .values(insertTransaction)
@@ -49,6 +54,7 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUserTransactions(userId: number): Promise<Transaction[]> {
+    if (!db) throw new Error("Database not available");
     return await db
       .select()
       .from(transactions)
@@ -214,4 +220,9 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+// For production deployment, use in-memory storage to avoid serverless function crashes
+// TODO: Switch back to database storage once Vercel environment is properly configured
+const storage: IStorage = new MemStorage();
+console.log("📝 Using in-memory storage for production deployment");
+
+export { storage };

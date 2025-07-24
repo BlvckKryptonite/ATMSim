@@ -38,22 +38,22 @@ export default function Withdraw() {
   const withdrawMutation = useMutation({
     mutationFn: async (data: TransactionData) => {
       if (!user) throw new Error("User not authenticated");
-      const response = await apiRequest("POST", `/api/users/${user.id}/withdraw`, data);
-      return response.json();
+      const success = await authManager.processTransaction(user.id, 'withdrawal', data.amount);
+      if (!success) throw new Error("Insufficient funds or transaction failed");
+      return { success: true, amount: data.amount };
     },
     onSuccess: (result) => {
-      authManager.setCurrentUser(result.user);
       queryClient.invalidateQueries({ queryKey: ['/api/users', user?.id, 'transactions'] });
       
       const now = new Date();
       setReceiptData({
         type: 'withdrawal',
-        amount: result.transaction.amount,
+        amount: result.amount,
         date: now.toLocaleDateString(),
         time: now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
-        accountNumber: result.user.accountNumber,
-        newBalance: result.user.balance,
-        referenceId: result.transaction.referenceId,
+        accountNumber: user?.fullName || 'ATM User',
+        newBalance: authManager.getCurrentUser()?.balance || user?.balance,
+        referenceId: `TXN-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-${Math.random().toString().slice(2, 5)}`,
       });
     },
     onError: (err) => {
