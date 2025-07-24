@@ -75,11 +75,13 @@ Preferred communication style: Technical but highly readable - include framework
 - **Dark Mode Ready**: CSS variables and theme system prepared
 
 ### 📄 Receipt System
-- **Digital Receipts**: Text-based receipt generation with company branding
-- **Download Functionality**: One-click download as .txt files
+- **Digital Receipts**: Professional receipt generation with company branding
+- **Multiple Formats**: Download receipts as PDF or text files
+- **PDF Generation**: jsPDF library creates ATM-sized PDF receipts (80mm x 120mm)
 - **Transaction Details**: Complete transaction metadata including reference IDs
-- **Modal Display**: In-app receipt preview with download option
-- **Branded Format**: ATMSim logo integration in receipt headers
+- **Modal Display**: In-app receipt preview with dual download options
+- **Professional Layout**: ATM-style formatting with proper spacing and typography
+- **Branded Format**: ATMSim logo integration and "Designed by Muma K." attribution
 
 ### 🗄️ Data Management
 - **PostgreSQL Integration**: Production-grade database with ACID compliance
@@ -123,6 +125,7 @@ Preferred communication style: Technical but highly readable - include framework
 - **lucide-react**: Beautiful & consistent icon library (1000+ icons)
 - **clsx & tailwind-merge**: Utility functions for conditional CSS classes
 - **zod**: TypeScript-first schema validation with static type inference
+- **jspdf**: PDF generation library for creating professional receipts
 
 ### Core Backend Dependencies
 - **Express.js 4.x**: Fast, unopinionated web framework for Node.js

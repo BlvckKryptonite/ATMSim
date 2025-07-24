@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { downloadReceipt, type ReceiptData } from "@/lib/pdf-generator";
-import { CheckCircle, Download } from "lucide-react";
+import { downloadReceiptPDF, downloadReceiptText, type ReceiptData } from "@/lib/pdf-generator";
+import { CheckCircle, Download, FileText } from "lucide-react";
 
 interface ReceiptModalProps {
   data: ReceiptData;
@@ -8,8 +8,12 @@ interface ReceiptModalProps {
 }
 
 export function ReceiptModal({ data, onClose }: ReceiptModalProps) {
-  const handleDownload = () => {
-    downloadReceipt(data);
+  const handleDownloadPDF = () => {
+    downloadReceiptPDF(data);
+  };
+
+  const handleDownloadText = () => {
+    downloadReceiptText(data);
   };
 
   const formatCurrency = (amount: string) => {
@@ -66,18 +70,28 @@ export function ReceiptModal({ data, onClose }: ReceiptModalProps) {
           </div>
         </div>
 
-        <div className="flex gap-3">
-          <Button
-            onClick={handleDownload}
-            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 font-medium flex items-center justify-center"
-          >
-            <Download className="w-4 h-4 mr-2" />
-            Download
-          </Button>
+        <div className="flex flex-col gap-3">
+          <div className="flex gap-2">
+            <Button
+              onClick={handleDownloadPDF}
+              className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-3 font-medium flex items-center justify-center"
+            >
+              <Download className="w-4 h-4 mr-2" />
+              PDF
+            </Button>
+            <Button
+              onClick={handleDownloadText}
+              variant="outline"
+              className="flex-1 py-3 font-medium flex items-center justify-center"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Text
+            </Button>
+          </div>
           <Button
             onClick={onClose}
             variant="outline"
-            className="flex-1 py-3 font-medium"
+            className="w-full py-3 font-medium"
           >
             Close
           </Button>
