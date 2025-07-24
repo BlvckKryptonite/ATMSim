@@ -1,8 +1,8 @@
-# VaultSim - Professional ATM Simulator
+# ATMSim - Professional ATM Simulator
 
 ## Overview
 
-VaultSim is a full-stack ATM Simulator application built with React frontend and Express backend. The application simulates a complete ATM experience including user authentication, account management, and transaction processing with receipt generation capabilities. Designed as a portfolio project by Muma K.
+ATMSim is a full-stack ATM Simulator application built with React frontend and Express backend. The application simulates a complete ATM experience including user authentication, account management, and transaction processing with receipt generation capabilities. Designed as a portfolio project by Muma K.
 
 ## User Preferences
 

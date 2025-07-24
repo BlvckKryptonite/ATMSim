@@ -30,7 +30,7 @@ export function ReceiptModal({ data, onClose }: ReceiptModalProps) {
         {/* Receipt Details */}
         <div className="bg-gray-50 rounded-lg p-4 mb-6 font-mono text-sm">
           <div className="text-center border-b border-gray-300 pb-3 mb-3">
-            <h4 className="font-bold">VaultSim</h4>
+            <h4 className="font-bold font-league-gothic">ATMSim</h4>
             <p className="text-xs">TRANSACTION RECEIPT</p>
           </div>
 
