@@ -1,0 +1,122 @@
+Full-Stack ATM Simulator
+Project Goal:
+Develop a polished, full-stack ATM Simulator with a clean UI using React and Next.js for the frontend and Python for the backend. This will simulate an ATM environment where users can securely log in, view their balances, deposit/withdraw money, and generate transaction receipts. The app will use a combination of fake user data and simulated banking features, including multiple accounts, transactions, and multi-currency support.
+
+Frontend (React + Next.js) Requirements
+Project Setup
+
+Use Next.js for the React framework.
+
+Set up Tailwind CSS for responsive styling.
+
+Implement React hooks to handle state management for authentication, balance, and transaction states.
+
+Pages & Components
+
+Login Page:
+
+Inputs for username and PIN.
+
+Secure authentication handling and form validation.
+
+Dashboard Page:
+
+Display the user’s balance and transaction history.
+
+Options to deposit and withdraw money.
+
+Transaction History:
+
+List of previous transactions with date, type (deposit/withdraw), and amount.
+
+Receipt Generation:
+
+Display or generate a downloadable receipt (e.g., PDF) after a transaction is made.
+
+Features
+
+Responsive Design: Make the app mobile-friendly.
+
+Animations: Use Framer Motion for smooth transitions when moving between screens.
+
+Error Handling: Show appropriate error messages for invalid PINs, insufficient funds, etc.
+
+Currency Conversion (optional): Allow the user to view their balance in multiple currencies using a currency API (e.g., exchangerate-api).
+
+API Integration
+
+Random User Data: Use randomuser.me API for generating fake user profiles, including account details (name, email, balance, etc.).
+
+Currency Exchange API: Integrate with a currency API to show the balance in multiple currencies.
+
+Backend (Python) Requirements
+API Setup
+
+Use Flask or FastAPI for building the backend.
+
+Implement a basic REST API to handle user authentication, transactions, and account data.
+
+User Management
+
+Use a JSON file or dictionary to simulate multiple users with different usernames, PINs, and balances.
+
+Implement secure login by validating the PIN entered by the user.
+
+Transaction Handling
+
+Implement functions for:
+
+Viewing balance.
+
+Depositing and withdrawing money.
+
+Recording transactions in a history log (stored in a JSON file).
+
+Add validation for insufficient funds during withdrawal and ensure the balance can’t go negative.
+
+Receipt Generation
+
+After each transaction, provide a receipt (summary of transaction) which could be displayed on the frontend or generated as a PDF (optional).
+
+Bonus Features
+
+Currency Exchange: Integrate with a currency API to convert balances to multiple currencies.
+
+Fake Data API: Use the randomuser.me API to populate user data and simulate a real banking experience.
+
+Deployment Requirements
+Frontend Deployment:
+
+Deploy the Next.js app on Vercel for fast, optimized performance.
+
+Backend Deployment:
+
+Host the Flask or FastAPI backend on Heroku or within a serverless function in the Next.js API routes.
+
+Documentation:
+
+Write a comprehensive README to guide users on how to run the project locally.
+
+Include setup instructions for both frontend and backend, along with features and technologies used.
+
+Tech Stack
+Frontend: React, Next.js, Tailwind CSS, Framer Motion
+
+Backend: Python (Flask/FastAPI), JSON file (for data storage)
+
+APIs: randomuser.me, exchangerate-api (optional for currency support)
+
+Deployment: Vercel (Frontend), Heroku (Backend) or Next.js API Routes
+
+Instructions for Replit:
+Set up the frontend with React and Tailwind CSS in a Next.js app.
+
+Create the backend using Flask or FastAPI to handle user authentication, transactions, and receipts.
+
+Simulate multiple users and transaction histories using JSON or a Python dictionary.
+
+Integrate with an API like randomuser.me to generate fake user data and display it on the frontend.
+
+Add optional currency conversion using an API like exchangerate-api.
+
+Deploy the project, ensuring a fast, responsive UI with smooth animations and a clean, professional design.
