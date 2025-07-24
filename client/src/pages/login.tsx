@@ -11,6 +11,7 @@ import { ErrorModal } from "@/components/error-modal";
 import { authManager } from "@/lib/auth";
 import { apiRequest } from "@/lib/queryClient";
 import { University, Lock, User, Key, LogIn } from "lucide-react";
+import { VaultSimLogo, CustomImageLogo } from "@/components/logo";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +49,15 @@ export default function Login() {
           <Card className="p-6 mb-4">
             <CardContent className="pt-0">
               <div className="flex items-center justify-center mb-3">
-                <University className="text-3xl w-8 h-8 text-blue-600 mr-3" />
+                {/* Option 1: Custom SVG Logo (currently active) */}
+                <VaultSimLogo size={32} className="mr-3" />
+                
+                {/* Option 2: Use custom uploaded image (uncomment and replace path when you upload your logo) */}
+                {/* <CustomImageLogo src="/assets/logo.png" size={32} className="mr-3" /> */}
+                
+                {/* Option 3: Keep original icon (backup) */}
+                {/* <University className="text-3xl w-8 h-8 text-blue-600 mr-3" /> */}
+                
                 <div>
                   <h1 className="text-2xl font-bold text-blue-600">VaultSim</h1>
                   <p className="text-sm text-gray-500">Professional ATM Simulator</p>
