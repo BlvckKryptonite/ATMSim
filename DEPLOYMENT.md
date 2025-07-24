@@ -11,7 +11,7 @@ This guide provides step-by-step instructions for deploying your ATMSim applicat
 
 ## Vercel Deployment (Recommended)
 
-Vercel is ideal for React applications and provides excellent performance with automatic deployments.
+Vercel is ideal for React + Express.js applications and provides excellent performance with automatic deployments.
 
 ### Prerequisites
 - GitHub account
