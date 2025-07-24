@@ -48,12 +48,9 @@ export default function Login() {
         <div className="text-center mb-8">
           <Card className="p-6 mb-4">
             <CardContent className="pt-0">
-              <div className="flex items-center justify-center mb-3">
-                <CustomImageLogo src="/atm_sim_logo.png" size={40} className="mr-3" />
-                <div>
-                  <h1 className="text-3xl font-bold text-blue-600 font-league-gothic">ATMSim</h1>
-                  <p className="text-sm text-gray-500">Professional ATM Simulator</p>
-                </div>
+              <div className="flex flex-col items-center justify-center mb-3">
+                <img src="/atm-sim-logo.png" alt="ATMSim Logo" className="h-16 mb-2" />
+                <p className="text-sm text-gray-500">Professional ATM Simulator</p>
               </div>
             </CardContent>
           </Card>
