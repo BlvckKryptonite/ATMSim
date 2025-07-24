@@ -43,9 +43,7 @@ export const loginSchema = z.object({
 });
 
 export const transactionSchema = z.object({
-  amount: z.string().transform((val) => parseFloat(val)).pipe(
-    z.number().positive("Amount must be positive").min(0.01, "Minimum amount is $0.01")
-  ),
+  amount: z.coerce.number().positive("Amount must be positive").min(0.01, "Minimum amount is $0.01"),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

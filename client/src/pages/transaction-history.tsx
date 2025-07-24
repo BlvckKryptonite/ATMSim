@@ -128,7 +128,7 @@ export default function TransactionHistory() {
                       </div>
                       <div>
                         <p className="font-medium text-gray-900 capitalize">{transaction.type}</p>
-                        <p className="text-sm text-gray-600">{formatDate(transaction.timestamp)}</p>
+                        <p className="text-sm text-gray-600">{formatDate(transaction.timestamp.toString())}</p>
                         <p className="text-xs text-gray-500">Transaction ID: {transaction.referenceId}</p>
                       </div>
                     </div>

@@ -136,7 +136,7 @@ export default function Dashboard() {
                         </div>
                         <div>
                           <p className="font-medium text-gray-900 capitalize">{transaction.type}</p>
-                          <p className="text-sm text-gray-600">{formatDate(transaction.timestamp)}</p>
+                          <p className="text-sm text-gray-600">{formatDate(transaction.timestamp.toString())}</p>
                         </div>
                       </div>
                       <span className={`font-mono font-semibold ${

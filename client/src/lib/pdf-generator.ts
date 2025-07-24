@@ -10,7 +10,7 @@ export interface ReceiptData {
 
 export function generateReceiptText(data: ReceiptData): string {
   return `
-ATMVault
+VaultSim
 TRANSACTION RECEIPT
 ========================
 
@@ -23,7 +23,7 @@ New Balance: $${data.newBalance}
 Ref ID: ${data.referenceId}
 
 ========================
-Thank you for using ATMVault
+Thank you for using VaultSim
   `.trim();
 }
 
@@ -34,7 +34,7 @@ export function downloadReceipt(data: ReceiptData): void {
   
   const link = document.createElement('a');
   link.href = url;
-  link.download = `ATMVault_Receipt_${data.referenceId}.txt`;
+  link.download = `VaultSim_Receipt_${data.referenceId}.txt`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);

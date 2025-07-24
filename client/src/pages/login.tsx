@@ -50,8 +50,8 @@ export default function Login() {
               <div className="flex items-center justify-center mb-3">
                 <University className="text-3xl w-8 h-8 text-blue-600 mr-3" />
                 <div>
-                  <h1 className="text-2xl font-bold text-gray-900">ATMVault</h1>
-                  <p className="text-sm text-gray-500">Secure Banking Simulator</p>
+                  <h1 className="text-2xl font-bold text-blue-600">VaultSim</h1>
+                  <p className="text-sm text-gray-500">Professional ATM Simulator</p>
                 </div>
               </div>
             </CardContent>
@@ -112,9 +112,12 @@ export default function Login() {
 
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">
               <h4 className="font-medium text-gray-900 mb-2">Demo Accounts:</h4>
-              <div className="text-sm space-y-1">
+              <div className="text-sm space-y-1 max-h-32 overflow-y-auto">
                 <div><strong>User:</strong> demo1 <strong>PIN:</strong> 1234</div>
                 <div><strong>User:</strong> demo2 <strong>PIN:</strong> 5678</div>
+                <div><strong>User:</strong> muma <strong>PIN:</strong> 9999</div>
+                <div><strong>User:</strong> alex <strong>PIN:</strong> 7890</div>
+                <div><strong>User:</strong> sarah <strong>PIN:</strong> 4567</div>
               </div>
             </div>
           </CardContent>

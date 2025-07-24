@@ -31,7 +31,7 @@ export default function Withdraw() {
   const form = useForm<TransactionData>({
     resolver: zodResolver(transactionSchema),
     defaultValues: {
-      amount: "" as any,
+      amount: 0,
     },
   });
 
@@ -67,7 +67,7 @@ export default function Withdraw() {
   };
 
   const selectQuickAmount = (amount: number) => {
-    form.setValue("amount", amount.toString() as any);
+    form.setValue("amount", amount as any);
   };
 
   const goBack = () => {
