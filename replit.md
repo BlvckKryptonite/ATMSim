@@ -73,6 +73,7 @@ Preferred communication style: Technical but highly readable - include framework
 - **Accessibility**: ARIA-compliant components via Radix UI primitives
 - **Custom Branding**: Integrated ATMSim logo with credit card iconography
 - **Dark Mode Ready**: CSS variables and theme system prepared
+- **Playful Animations**: Confetti celebrations for successful transactions and downloads
 
 ### 📄 Receipt System
 - **Digital Receipts**: Professional receipt generation with company branding
@@ -126,6 +127,7 @@ Preferred communication style: Technical but highly readable - include framework
 - **clsx & tailwind-merge**: Utility functions for conditional CSS classes
 - **zod**: TypeScript-first schema validation with static type inference
 - **jspdf**: PDF generation library for creating professional receipts
+- **canvas-confetti**: Interactive confetti animations for delightful user feedback
 
 ### Core Backend Dependencies
 - **Express.js 4.x**: Fast, unopinionated web framework for Node.js

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { downloadReceiptPDF, downloadReceiptText, type ReceiptData } from "@/lib/pdf-generator";
+import { triggerDepositConfetti, triggerWithdrawalConfetti, triggerConfetti } from "@/lib/confetti";
 import { CheckCircle, Download, FileText } from "lucide-react";
+import { useEffect } from "react";
 
 interface ReceiptModalProps {
   data: ReceiptData;
@@ -10,11 +12,40 @@ interface ReceiptModalProps {
 export function ReceiptModal({ data, onClose }: ReceiptModalProps) {
   const handleDownloadPDF = () => {
     downloadReceiptPDF(data);
+    // Small confetti burst for PDF download
+    triggerConfetti({
+      particleCount: 30,
+      spread: 50,
+      origin: { x: 0.35, y: 0.8 },
+      colors: ['#1E40AF', '#2563EB', '#3B82F6']
+    });
   };
 
   const handleDownloadText = () => {
     downloadReceiptText(data);
+    // Small confetti burst for text download
+    triggerConfetti({
+      particleCount: 25,
+      spread: 45,
+      origin: { x: 0.65, y: 0.8 },
+      colors: ['#059669', '#10B981', '#34D399']
+    });
   };
+
+  // Trigger confetti animation when modal opens
+  useEffect(() => {
+    const triggerAnimation = () => {
+      if (data.type === 'deposit') {
+        triggerDepositConfetti();
+      } else if (data.type === 'withdrawal') {
+        triggerWithdrawalConfetti();
+      }
+    };
+
+    // Small delay to ensure modal is visible before confetti
+    const timer = setTimeout(triggerAnimation, 300);
+    return () => clearTimeout(timer);
+  }, [data.type]);
 
   const formatCurrency = (amount: string) => {
     return `$${parseFloat(amount).toFixed(2)}`;
@@ -24,8 +55,8 @@ export function ReceiptModal({ data, onClose }: ReceiptModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-xl max-w-sm w-full p-6">
         <div className="text-center mb-6">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-            <CheckCircle className="w-8 h-8 text-green-600" />
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 animate-pulse">
+            <CheckCircle className="w-8 h-8 text-green-600 animate-bounce" />
           </div>
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Transaction Successful</h3>
           <p className="text-sm text-gray-600">Your transaction has been completed</p>
