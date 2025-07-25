@@ -69,56 +69,106 @@ export default function Login() {
             </div>
 
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div>
-                <Label className="text-sm font-medium text-gray-900 mb-2 flex items-center">
-                  <User className="w-4 h-4 mr-2" />
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-gray-900 flex items-center">
+                  <User className="w-4 h-4 mr-2 text-blue-600" />
                   Username
                 </Label>
-                <Input
-                  {...form.register("username")}
-                  placeholder="Enter your username"
-                  className="w-full"
-                />
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    {...form.register("username")}
+                    placeholder="Enter your username"
+                    className="pl-10 transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-blue-300"
+                  />
+                </div>
                 {form.formState.errors.username && (
-                  <p className="text-red-500 text-sm mt-1">{form.formState.errors.username.message}</p>
+                  <p className="text-red-500 text-sm mt-1 flex items-center animate-in fade-in duration-200">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                    {form.formState.errors.username.message}
+                  </p>
                 )}
               </div>
 
-              <div>
-                <Label className="text-sm font-medium text-gray-900 mb-2 flex items-center">
-                  <Key className="w-4 h-4 mr-2" />
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-gray-900 flex items-center">
+                  <Key className="w-4 h-4 mr-2 text-blue-600" />
                   PIN
                 </Label>
-                <Input
-                  {...form.register("pin")}
-                  type="password"
-                  placeholder="Enter your 4-digit PIN"
-                  maxLength={4}
-                  className="w-full font-mono text-center text-lg tracking-widest"
-                />
+                <div className="relative">
+                  <Key className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Input
+                    {...form.register("pin")}
+                    type="password"
+                    placeholder="Enter your 4-digit PIN"
+                    maxLength={4}
+                    className="pl-10 font-mono text-center text-lg tracking-widest transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-blue-300"
+                  />
+                </div>
                 {form.formState.errors.pin && (
-                  <p className="text-red-500 text-sm mt-1">{form.formState.errors.pin.message}</p>
+                  <p className="text-red-500 text-sm mt-1 flex items-center animate-in fade-in duration-200">
+                    <span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
+                    {form.formState.errors.pin.message}
+                  </p>
                 )}
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 font-medium flex items-center justify-center"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 font-medium flex items-center justify-center transition-all duration-200 hover:shadow-lg transform hover:scale-[1.02] active:scale-[0.98]"
                 disabled={isLoading}
               >
-                <LogIn className="w-4 h-4 mr-2" />
-                Access Account
+                {isLoading ? (
+                  <>
+                    <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    Authenticating...
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="w-4 h-4 mr-2" />
+                    Access Account
+                  </>
+                )}
               </Button>
             </form>
 
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-medium text-gray-900 mb-2">Demo Accounts:</h4>
-              <div className="text-sm space-y-1 max-h-32 overflow-y-auto">
-                <div><strong>User:</strong> demo1 <strong>PIN:</strong> 1234</div>
-                <div><strong>User:</strong> demo2 <strong>PIN:</strong> 5678</div>
-                <div><strong>User:</strong> muma <strong>PIN:</strong> 9999</div>
-                <div><strong>User:</strong> alex <strong>PIN:</strong> 7890</div>
-                <div><strong>User:</strong> sarah <strong>PIN:</strong> 4567</div>
+            {/* Forgot PIN Feature */}
+            <div className="mt-4 text-center">
+              <Button
+                variant="link"
+                className="text-blue-600 text-sm p-0 h-auto hover:underline"
+                onClick={() => setError("Demo mode: All demo account PINs are listed below for testing purposes.")}
+              >
+                Forgot your PIN?
+              </Button>
+            </div>
+
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+              <h4 className="font-medium text-gray-900 mb-3 flex items-center">
+                <User className="w-4 h-4 mr-2 text-blue-600" />
+                Demo Accounts:
+              </h4>
+              <div className="text-sm space-y-2 max-h-32 overflow-y-auto">
+                <div className="flex justify-between items-center p-2 bg-white rounded border">
+                  <span><strong>demo1</strong></span>
+                  <span className="font-mono text-blue-600">1234</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-white rounded border">
+                  <span><strong>demo2</strong></span>
+                  <span className="font-mono text-blue-600">5678</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-white rounded border">
+                  <span><strong>muma</strong></span>
+                  <span className="font-mono text-blue-600">9999</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-white rounded border">
+                  <span><strong>alex</strong></span>
+                  <span className="font-mono text-blue-600">7890</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-white rounded border">
+                  <span><strong>sarah</strong></span>
+                  <span className="font-mono text-blue-600">4567</span>
+                </div>
               </div>
             </div>
           </CardContent>

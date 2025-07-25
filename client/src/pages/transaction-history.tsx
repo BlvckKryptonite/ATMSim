@@ -83,12 +83,12 @@ export default function TransactionHistory() {
             </div>
 
             {/* Filter Options */}
-            <div className="flex gap-2 mb-6 overflow-x-auto">
+            <div className="flex justify-center gap-2 mb-6 overflow-x-auto">
               <Button
                 size="sm"
                 variant={filter === 'all' ? 'default' : 'outline'}
                 onClick={() => setFilter('all')}
-                className={filter === 'all' ? 'bg-blue-600 text-white' : ''}
+                className={`transition-all duration-200 hover:shadow-md ${filter === 'all' ? 'bg-blue-600 text-white' : ''}`}
               >
                 All
               </Button>
@@ -96,7 +96,7 @@ export default function TransactionHistory() {
                 size="sm"
                 variant={filter === 'deposit' ? 'default' : 'outline'}
                 onClick={() => setFilter('deposit')}
-                className={filter === 'deposit' ? 'bg-blue-600 text-white' : ''}
+                className={`transition-all duration-200 hover:shadow-md ${filter === 'deposit' ? 'bg-green-600 text-white' : ''}`}
               >
                 Deposits
               </Button>
@@ -104,7 +104,7 @@ export default function TransactionHistory() {
                 size="sm"
                 variant={filter === 'withdrawal' ? 'default' : 'outline'}
                 onClick={() => setFilter('withdrawal')}
-                className={filter === 'withdrawal' ? 'bg-blue-600 text-white' : ''}
+                className={`transition-all duration-200 hover:shadow-md ${filter === 'withdrawal' ? 'bg-red-600 text-white' : ''}`}
               >
                 Withdrawals
               </Button>
@@ -118,10 +118,14 @@ export default function TransactionHistory() {
                   <p className="text-sm">Loading transactions...</p>
                 </div>
               ) : filteredTransactions.length > 0 ? (
-                filteredTransactions.map((transaction) => (
-                  <div key={transaction.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                filteredTransactions.map((transaction, index) => (
+                  <div 
+                    key={transaction.id} 
+                    className="flex items-center justify-between p-4 border border-gray-200 rounded-lg transition-all duration-200 hover:shadow-md hover:border-blue-300 animate-in slide-in-from-bottom"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
                     <div className="flex items-center">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 ${
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center mr-4 transition-transform duration-200 hover:scale-110 ${
                         transaction.type === 'deposit' ? 'bg-green-100' : 'bg-red-100'
                       }`}>
                         {transaction.type === 'deposit' ? (

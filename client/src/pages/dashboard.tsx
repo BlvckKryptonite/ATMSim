@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { authManager } from "@/lib/auth";
 import { Transaction, User } from "@shared/schema";
-import { LogOut, Plus, Minus, Eye, TrendingUp, TrendingDown } from "lucide-react";
+import { LogOut, Plus, Minus, Eye, TrendingUp, TrendingDown, CreditCard, Hash, User as UserIcon } from "lucide-react";
 
 export default function Dashboard() {
   const [, setLocation] = useLocation();
@@ -61,30 +61,58 @@ export default function Dashboard() {
         <Card className="shadow-xl">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-900">Account Overview</h2>
-                <p className="text-sm text-gray-600">{user.name}</p>
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                  <UserIcon className="w-6 h-6 text-blue-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-semibold text-gray-900">Welcome back</h2>
+                  <p className="text-sm text-gray-600">{user.fullName || user.name}</p>
+                </div>
               </div>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={handleLogout}
-                className="text-gray-500 hover:text-red-500"
+                className="text-gray-500 hover:text-red-500 transition-colors duration-200"
               >
                 <LogOut className="w-5 h-5" />
               </Button>
             </div>
+            
+            {/* Account Details Card */}
+            <div className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center space-x-2">
+                  <CreditCard className="w-5 h-5 text-blue-600" />
+                  <span className="font-medium text-gray-900">Account Details</span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="text-gray-600 flex items-center">
+                    <Hash className="w-4 h-4 mr-1" />
+                    Account
+                  </p>
+                  <p className="font-mono text-gray-900">{user.accountNumber || `****${user.id.toString().padStart(4, '0')}`}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600">Status</p>
+                  <p className="text-green-600 font-medium">Active</p>
+                </div>
+              </div>
+            </div>
 
             {/* Account Balance Card */}
-            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white mb-6">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-6 text-white mb-6 shadow-lg transform transition-all duration-300 hover:shadow-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-blue-100 text-sm mb-1">Available Balance</p>
-                  <p className="text-3xl font-bold font-mono">{formatCurrency(user.balance)}</p>
+                  <p className="text-3xl font-bold font-mono animate-in slide-in-from-left duration-500">{formatCurrency(user.balance)}</p>
                 </div>
                 <div className="text-right">
                   <p className="text-blue-100 text-sm mb-1">Account</p>
-                  <p className="font-mono text-sm">{user.accountNumber}</p>
+                  <p className="font-mono text-sm">{user.accountNumber || `****${user.id.toString().padStart(4, '0')}`}</p>
                 </div>
               </div>
             </div>
@@ -93,16 +121,16 @@ export default function Dashboard() {
             <div className="grid grid-cols-2 gap-4 mb-6">
               <Button
                 onClick={() => setLocation('/deposit')}
-                className="bg-green-600 hover:bg-green-700 text-white p-4 h-auto flex flex-col items-center space-y-2"
+                className="bg-green-600 hover:bg-green-700 text-white p-4 h-auto flex flex-col items-center space-y-2 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95"
               >
-                <Plus className="w-6 h-6" />
+                <Plus className="w-6 h-6 transition-transform duration-200 group-hover:scale-110" />
                 <span className="font-medium">Deposit</span>
               </Button>
               <Button
                 onClick={() => setLocation('/withdraw')}
-                className="bg-red-500 hover:bg-red-600 text-white p-4 h-auto flex flex-col items-center space-y-2"
+                className="bg-red-500 hover:bg-red-600 text-white p-4 h-auto flex flex-col items-center space-y-2 transition-all duration-200 hover:shadow-lg transform hover:scale-105 active:scale-95"
               >
-                <Minus className="w-6 h-6" />
+                <Minus className="w-6 h-6 transition-transform duration-200 group-hover:scale-110" />
                 <span className="font-medium">Withdraw</span>
               </Button>
             </div>
@@ -122,10 +150,14 @@ export default function Dashboard() {
 
               {recentTransactions.length > 0 ? (
                 <div className="space-y-3">
-                  {recentTransactions.map((transaction) => (
-                    <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                  {recentTransactions.map((transaction, index) => (
+                    <div 
+                      key={transaction.id} 
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg transition-all duration-200 hover:bg-gray-100 hover:shadow-md animate-in slide-in-from-bottom"
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
                       <div className="flex items-center">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 ${
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mr-3 transition-transform duration-200 hover:scale-110 ${
                           transaction.type === 'deposit' ? 'bg-green-100' : 'bg-red-100'
                         }`}>
                           {transaction.type === 'deposit' ? (
@@ -148,9 +180,12 @@ export default function Dashboard() {
                   ))}
                 </div>
               ) : (
-                <div className="text-center py-8 text-gray-500">
-                  <Eye className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                  <p className="text-sm">No transactions yet</p>
+                <div className="text-center py-8 text-gray-500 animate-in fade-in duration-500">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Eye className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <p className="text-sm font-medium">No transactions yet</p>
+                  <p className="text-xs text-gray-400 mt-1">Your recent activity will appear here</p>
                 </div>
               )}
             </div>
