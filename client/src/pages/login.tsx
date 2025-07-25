@@ -132,17 +132,6 @@ export default function Login() {
               </Button>
             </form>
 
-            {/* Forgot PIN Feature */}
-            <div className="mt-4 text-center">
-              <Button
-                variant="link"
-                className="text-blue-600 text-sm p-0 h-auto hover:underline"
-                onClick={() => setError("Demo mode: All demo account PINs are listed below for testing purposes.")}
-              >
-                Forgot your PIN?
-              </Button>
-            </div>
-
             <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
               <h4 className="font-medium text-gray-900 mb-3 flex items-center">
                 <User className="w-4 h-4 mr-2 text-blue-600" />

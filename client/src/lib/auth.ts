@@ -87,23 +87,26 @@ class AuthManager {
       if (!user) return false;
 
       const currentBalance = parseFloat(user.balance);
-      if (type === 'withdrawal' && currentBalance < amount) return false;
+      const transactionAmount = parseFloat(amount.toString());
+      
+      if (type === 'withdrawal' && currentBalance < transactionAmount) return false;
 
       const newBalance = type === 'deposit' 
-        ? (currentBalance + amount).toFixed(2)
-        : (currentBalance - amount).toFixed(2);
+        ? (currentBalance + transactionAmount).toFixed(2)
+        : (currentBalance - transactionAmount).toFixed(2);
 
       // Update user balance (mutate the demo data)
       (user as any).balance = newBalance;
 
-      // Add transaction
+      // Add transaction with string amount for consistency
       const newTransaction = {
         id: Date.now(),
         userId,
         type,
-        amount,
+        amount: transactionAmount.toFixed(2),
         timestamp: new Date(),
-        referenceId: `TXN-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-${Math.random().toString().slice(2, 5)}`
+        referenceId: `TXN-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-${Math.random().toString().slice(2, 5)}`,
+        balanceAfter: newBalance
       };
 
       if (!this.userTransactions.has(userId)) {
@@ -111,9 +114,11 @@ class AuthManager {
       }
       this.userTransactions.get(userId)!.unshift(newTransaction);
 
-      // Update current user if it's the same user
+      // Update current user if it's the same user and notify all subscribers
       if (this.currentUser && this.currentUser.id === userId) {
-        this.setCurrentUser({ ...this.currentUser, balance: newBalance });
+        const updatedUser = { ...this.currentUser, balance: newBalance };
+        this.currentUser = updatedUser;
+        this.notifyListeners(updatedUser);
       }
 
       return true;
@@ -127,7 +132,18 @@ class AuthManager {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount })
       });
-      return response.ok;
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Update current user balance after successful API call
+        if (this.currentUser && this.currentUser.id === userId && data.user) {
+          const updatedUser = { ...this.currentUser, balance: data.user.balance };
+          this.currentUser = updatedUser;
+          this.notifyListeners(updatedUser);
+        }
+        return true;
+      }
+      return false;
     } catch {
       return false;
     }
