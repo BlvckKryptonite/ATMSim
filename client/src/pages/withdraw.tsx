@@ -51,7 +51,7 @@ export default function Withdraw() {
         amount: result.amount,
         date: now.toLocaleDateString(),
         time: now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
-        accountNumber: user?.fullName || 'ATM User',
+        accountNumber: user?.name || 'ATM User',
         newBalance: authManager.getCurrentUser()?.balance || user?.balance,
         referenceId: `TXN-${new Date().toISOString().split('T')[0].replace(/-/g, '')}-${Math.random().toString().slice(2, 5)}`,
       });

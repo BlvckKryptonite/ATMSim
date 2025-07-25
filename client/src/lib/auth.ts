@@ -2,11 +2,11 @@ import { User } from "@shared/schema";
 
 // Demo users for production deployment (client-side authentication)
 const DEMO_USERS = [
-  { id: 1, username: "demo1", pin: "1234", balance: "1250.75", fullName: "Demo User 1" },
-  { id: 2, username: "demo2", pin: "5678", balance: "2100.50", fullName: "Demo User 2" },
-  { id: 3, username: "muma", pin: "9999", balance: "5000.00", fullName: "Muma Kalobwe" },
-  { id: 4, username: "alex", pin: "7890", balance: "800.25", fullName: "Alex Johnson" },
-  { id: 5, username: "sarah", pin: "4567", balance: "3200.80", fullName: "Sarah Williams" }
+  { id: 1, username: "demo1", pin: "1234", balance: "1250.75", name: "Demo User 1", accountNumber: "****0001" },
+  { id: 2, username: "demo2", pin: "5678", balance: "2100.50", name: "Demo User 2", accountNumber: "****0002" },
+  { id: 3, username: "muma", pin: "9999", balance: "5000.00", name: "Muma Kalobwe", accountNumber: "****0003" },
+  { id: 4, username: "alex", pin: "7890", balance: "800.25", name: "Alex Johnson", accountNumber: "****0004" },
+  { id: 5, username: "sarah", pin: "4567", balance: "3200.80", name: "Sarah Williams", accountNumber: "****0005" }
 ] as const;
 
 // Demo transactions for production
@@ -47,7 +47,11 @@ class AuthManager {
 
   setCurrentUser(user: User | null) {
     this.currentUser = user;
-    this.listeners.forEach(listener => listener(user));
+    this.notifyListeners(user);
+  }
+
+  logout() {
+    this.setCurrentUser(null);
   }
 
   subscribe(listener: (user: User | null) => void) {
@@ -55,6 +59,10 @@ class AuthManager {
     return () => {
       this.listeners = this.listeners.filter(l => l !== listener);
     };
+  }
+
+  private notifyListeners(user: User | null) {
+    this.listeners.forEach(listener => listener(user));
   }
 
   // Client-side authentication for production
@@ -163,10 +171,6 @@ class AuthManager {
     } catch {
       return [];
     }
-  }
-
-  logout() {
-    this.setCurrentUser(null);
   }
 }
 

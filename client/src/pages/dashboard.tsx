@@ -67,7 +67,7 @@ export default function Dashboard() {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">Welcome back</h2>
-                  <p className="text-sm text-gray-600">{user.fullName || user.name}</p>
+                  <p className="text-sm text-gray-600">{user.name}</p>
                 </div>
               </div>
               <Button
