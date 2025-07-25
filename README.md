@@ -90,7 +90,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/atmsim.git
+   git clone https://github.com/BlvckKryptonite/ATMSim.git
    cd atmsim
    ```
 
@@ -102,7 +102,7 @@
 3. **Set up environment variables**
    ```bash
    cp .env.example .env
-   # Edit .env with your database credentials
+   # Edit .env (inserted database credentials)
    ```
 
 4. **Set up the database**
@@ -114,9 +114,6 @@
    ```bash
    npm run dev
    ```
-
-6. **Open your browser**
-   Navigate to `http://localhost:5000`
 
 ## 📊 Project Structure
 
@@ -139,13 +136,8 @@
 
 ## 🌐 Deployment
 
-Ready for deployment on multiple platforms:
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for details.
 
-- **[Vercel](./DEPLOYMENT.md#vercel-deployment)** (Recommended)
-- **[Heroku](./DEPLOYMENT.md#heroku-deployment)**
-- **Railway, Netlify, or any Node.js hosting**
-
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed instructions.
 
 ## 🎯 Portfolio Highlights
 
